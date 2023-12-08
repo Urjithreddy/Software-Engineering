@@ -1,0 +1,234 @@
+CODE1.1
+from matplotlib import pyplot as plt
+import pandas as pd
+import numpy as np
+
+# Hardcoded sets of coefficients
+hardcoded_sets = [
+    {'a': 4, 'b': 6, 'c': 10},
+    {'a': 1, 'b': 2, 'c': 3},
+]
+
+# Reading data from data.csv
+data = pd.read_csv("data.csv")
+df = pd.DataFrame(data)
+
+# Plotting for data.csv coefficients
+for i in range(len(df)):
+    a = df.iloc[i, 0]
+    b = df.iloc[i, 1]
+    c = df.iloc[i, 2]
+    set_values = f'Data.csv - Set {i+1}: a={a}, b={b}, c={c}'
+    x_range = (-100, 100)
+    x_start, x_end = x_range
+    x_step = 1
+    if x_end > x_start:
+        x_list = np.arange(x_start, x_end, x_step)
+        y_list = []
+        for x in x_list:
+            y = a * x ** 2 + b * x + c
+            y_list.append(y)
+        plt.plot(x_list, y_list, label=set_values)
+
+# Plotting for hardcoded coefficients
+for idx, set_values in enumerate(hardcoded_sets, start=1):
+    a = set_values['a']
+    b = set_values['b']
+    c = set_values['c']
+    set_values_str = f'Hardcoded Set {idx}: a={a}, b={b}, c={c}'
+    x_range = (-100, 100)
+    x_start, x_end = x_range
+    x_step = 1
+    if x_end > x_start:
+        x_list = np.arange(x_start, x_end, x_step)
+        y_list = []
+        for x in x_list:
+            y = a * x ** 2 + b * x + c
+            y_list.append(y)
+        plt.plot(x_list, y_list, label=set_values_str)
+
+# Adding legend and displaying the plot
+plt.legend()
+plt.title('Quadratic Equations with Different Coefficients')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.grid(True)
+plt.show()
+
+CODE1.2
+from matplotlib import pyplot as plt
+import numpy as np
+
+# Hardcoded set of coefficients
+hardcoded_set = {'a': 4, 'b': 6, 'c': 10}
+
+# User input for coefficients
+print("Enter coefficients for the quadratic equation:")
+a = float(input("Enter value for 'a': "))
+b = float(input("Enter value for 'b': "))
+c = float(input("Enter value for 'c': "))
+
+# Plotting for hardcoded coefficients
+x_range = (-100, 100)
+x_start, x_end = x_range
+x_step = 1
+if x_end > x_start:
+    x_list = np.arange(x_start, x_end, x_step)
+    y_list = []
+    for x in x_list:
+        y = hardcoded_set['a'] * x ** 2 + hardcoded_set['b'] * x + hardcoded_set['c']
+        y_list.append(y)
+    plt.plot(x_list, y_list, label="Hardcoded Set: a=4, b=6, c=10")
+
+# Plotting for user-input coefficients
+y_list_user = []
+for x in x_list:
+    y_user = a * x ** 2 + b * x + c
+    y_list_user.append(y_user)
+plt.plot(x_list, y_list_user, label=f"User Input Set: a={a}, b={b}, c={c}")
+
+# Adding legend and displaying the plot
+plt.legend()
+plt.title('Comparison of Hardcoded and User Input Coefficients')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.grid(True)
+plt.show()
+
+CODE2.1
+import matplotlib.pyplot as plt
+import numpy as np
+
+a = 0.1
+b = -0.5
+c = 20
+
+time = np.linspace(0, 100, 1000)
+temperature = a * time ** 2 + b * time + c
+
+plt.figure(figsize=(8, 6))
+plt.plot(time, temperature, label='Temperature Change')
+plt.title('Modeling Temperature Change over Time')
+plt.xlabel('Time')
+plt.ylabel('Temperature')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+CODE2.2
+import matplotlib.pyplot as plt
+import numpy as np
+
+print("Enter coefficients for the quadratic equation representing temperature change:")
+a = float(input("Enter value for 'a' (coefficient of t^2): "))
+b = float(input("Enter value for 'b' (coefficient of t): "))
+c = float(input("Enter value for 'c' (constant term): "))
+
+time = np.linspace(0, 100, 1000)
+temperature = a * time ** 2 + b * time + c
+
+plt.figure(figsize=(8, 6))
+plt.plot(time, temperature, label='Temperature Change')
+plt.title('Modeling Temperature Change over Time')
+plt.xlabel('Time')
+plt.ylabel('Temperature')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+CODE2.3
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+data = pd.read_csv("data.csv")
+coefficients = data.values
+
+plt.figure(figsize=(8, 6))
+time = np.linspace(0, 100, 1000)
+
+for coeffs in coefficients:
+    a, b, c = coeffs
+    temperature = a * time ** 2 + b * time + c
+    plt.plot(time, temperature, label=f'a={a}, b={b}, c={c}')
+
+plt.title('Modeling Temperature Change over Time')
+plt.xlabel('Time')
+plt.ylabel('Temperature')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+CODE2.4
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+coefficients_sets = [
+    {'a': 0.1, 'b': -0.5, 'c': 20},
+    {'a': 0.2, 'b': -0.8, 'c': 25},
+    {'a': 0.15, 'b': -0.6, 'c': 22}
+]
+
+time = np.linspace(0, 100, 1000)
+
+plt.figure(figsize=(8, 6))
+
+for idx, coeffs in enumerate(coefficients_sets, start=1):
+    a = coeffs['a']
+    b = coeffs['b']
+    c = coeffs['c']
+
+    temperature = a * time ** 2 + b * time + c
+    plt.plot(time, temperature, label=f'Set {idx}: a={a}, b={b}, c={c}')
+
+plt.title('Modeling Temperature Change over Time for Multiple Coefficient Sets')
+plt.xlabel('Time')
+plt.ylabel('Temperature')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+CODE2.5
+import matplotlib.pyplot as plt
+import numpy as np
+hardcoded_coefficients = [
+    {'a': 0.1, 'b': -0.5, 'c': 20},
+    {'a': 0.2, 'b': -0.8, 'c': 25}
+]
+
+print("Enter coefficients for the quadratic equation representing temperature change:")
+a = float(input("Enter value for 'a' (coefficient of t^2): "))
+b = float(input("Enter value for 'b' (coefficient of t): "))
+c = float(input("Enter value for 'c' (constant term): "))
+
+user_coefficients = {'a': a, 'b': b, 'c': c}
+time = np.linspace(0, 100, 1000)
+plt.figure(figsize=(8, 6))
+
+for idx, coeffs in enumerate(hardcoded_coefficients, start=1):
+    a = coeffs['a']
+    b = coeffs['b']
+    c = coeffs['c']
+
+    temperature = a * time ** 2 + b * time + c
+    plt.plot(time, temperature, label=f'Hardcoded Set {idx}: a={a}, b={b}, c={c}')
+
+a = user_coefficients['a']
+b = user_coefficients['b']
+c = user_coefficients['c']
+
+temperature = a * time ** 2 + b * time + c
+plt.plot(time, temperature, label=f'User Input: a={a}, b={b}, c={c}', linestyle='--')
+
+plt.title('Modeling Temperature Change over Time')
+plt.xlabel('Time')
+plt.ylabel('Temperature')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+
+
